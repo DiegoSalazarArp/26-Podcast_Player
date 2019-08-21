@@ -9,8 +9,36 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let episode = Episode(name: "Macbreak Weekly", track: "WWWDC 2019")
+    
+    @State private var isPlaying = false
+    
     var body: some View {
-        Text("Hello World")
+        VStack{
+            Text(self.episode.name)
+                .font(.title)
+                .foregroundColor(self.isPlaying ? .green : .black)
+            
+            Text(self.episode.track)
+                .foregroundColor(.secondary)
+            
+            PlayButton(tocando: $isPlaying)
+        }
+    }
+}
+
+struct PlayButton: View{
+    
+    @Binding var tocando: Bool
+    
+    var body: some View{
+        Button(action: {
+            self.tocando.toggle()
+        }){
+            Text("Play")
+            .padding(12)
+        }
     }
 }
 
